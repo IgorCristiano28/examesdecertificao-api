@@ -1,5 +1,7 @@
 package igor.jesus.examesdecertificacao.service.imple;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -43,7 +45,7 @@ public class CandidateServiceImpl implements CandidateService{
 
 	@Override
 	@Transactional
-	public Candidate salvarCandidato(Candidate candidate) {
+	public Candidate createCandidate(Candidate candidate) {
 		validarEmail(candidate.getEmail());
 		return repository.save(candidate);
 	}
@@ -58,9 +60,23 @@ public class CandidateServiceImpl implements CandidateService{
 		
 	}
 
+
+	@Override
+	public void delete(Candidate candidate) {
+		Objects.requireNonNull(candidate.getId());
+		repository.delete(candidate);
+		
+	}
+
+	@Override
+	public List<Candidate> buscar(Candidate candidateFiltro) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public Optional<Candidate> obterPorId(Long id) {
-		// TODO Auto-generated method stub
+		
 		return repository.findById(id);
 	}
 

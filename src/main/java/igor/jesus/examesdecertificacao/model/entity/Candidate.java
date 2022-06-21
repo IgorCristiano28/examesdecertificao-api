@@ -8,6 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
@@ -33,11 +37,11 @@ public class Candidate {
 	@Column (name= "nome")
 	private String nome;
 	
-	@Column (name = "email")
-	private String email;
-	
 	@Column (name =  "senha")
 	private String senha;
+	
+	@Column (name = "email")
+	private String email;
 	
 	@Column (name =  "data_cadastro")
 	@Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)

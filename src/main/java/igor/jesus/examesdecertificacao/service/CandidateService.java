@@ -1,16 +1,21 @@
 package igor.jesus.examesdecertificacao.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import igor.jesus.examesdecertificacao.model.entity.Candidate;
 
 public interface CandidateService {
 	
-    Candidate autenticar(String email, String senha);
+    public Candidate autenticar(String email, String senha);
 	
-	Candidate salvarCandidato(Candidate candidate);
+	public Candidate createCandidate(Candidate candidate);
+	
+	void delete(Candidate candidate);
 	
 	void validarEmail(String email);
+	
+	List<Candidate> buscar(Candidate candidateFiltro);
 	
 	 //metodo pra buscar usuario por id, passando o id para retorna o usuario
 	 Optional<Candidate> obterPorId(Long id);

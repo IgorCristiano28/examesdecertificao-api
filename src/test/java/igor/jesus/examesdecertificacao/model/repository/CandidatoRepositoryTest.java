@@ -31,6 +31,7 @@ public class CandidatoRepositoryTest {
 	@Test @Order(1)
 	public void deveVerificarAExistenciaDeUmEmail() {
 		Candidate candidate = criarCandidate();
+		//repository.save(candidate);
 		entityManager.persist(candidate);
 		
 		
@@ -99,6 +100,7 @@ public class CandidatoRepositoryTest {
 	public static Candidate criarCandidate() {
 		return   Candidate 
 				.builder()
+				.nome("Igor")
 				.email("candidate@email.com")
 				.senha("senha")
 				.build();

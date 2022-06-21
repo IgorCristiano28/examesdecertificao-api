@@ -10,6 +10,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
@@ -25,7 +30,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "availability", schema = "certificacao")
+@Table(name = "availabity", schema = "certificacao")
 public class Availability {
 	
 	@Id
@@ -33,13 +38,15 @@ public class Availability {
 	@GeneratedValue (strategy =  GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column (name= "descricao")
+	@Column (name = "descricao")
 	private String descricao;
 	
 	@Column(name = "status")
-	@Enumerated(value = EnumType.STRING)
-	private StatusAvailability status;
+	private String status;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_room")
+	private Room room;
 	
 	@Column (name= "data_cadastro")
 	@Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
