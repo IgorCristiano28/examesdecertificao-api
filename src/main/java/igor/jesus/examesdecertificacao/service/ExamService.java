@@ -9,7 +9,7 @@ import igor.jesus.examesdecertificacao.model.entity.Exam;
 
 public interface ExamService {
 	
-	public Exam createExam(Exam exam);
+	public Exam salvar(Exam exam);
 	public Exam atualizar (Exam exam);
 	
 	void delete(Exam exam);

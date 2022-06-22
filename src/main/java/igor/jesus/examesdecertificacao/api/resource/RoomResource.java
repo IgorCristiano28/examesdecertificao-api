@@ -20,19 +20,21 @@ import igor.jesus.examesdecertificacao.model.entity.Room;
 import igor.jesus.examesdecertificacao.service.AvailabilityService;
 import igor.jesus.examesdecertificacao.service.CandidateService;
 import igor.jesus.examesdecertificacao.service.RoomService;
+import lombok.RequiredArgsConstructor;
 
 
 
 @RestController
 @RequestMapping("/api/room")
+@RequiredArgsConstructor
 public class RoomResource {
 	
-	private RoomService service;
+	private final RoomService service;
 	
-	public RoomResource(RoomService service) {
-		this.service = service;
+	//public RoomResource(RoomService service) {
+	//	this.service = service;
 		
-	}
+	//}
 	
 	@PostMapping
 	public ResponseEntity salvar(@RequestBody RoomDto dto) {

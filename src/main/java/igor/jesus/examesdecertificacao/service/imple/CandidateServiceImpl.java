@@ -45,7 +45,7 @@ public class CandidateServiceImpl implements CandidateService{
 
 	@Override
 	@Transactional
-	public Candidate createCandidate(Candidate candidate) {
+	public Candidate salvar(Candidate candidate) {
 		validarEmail(candidate.getEmail());
 		return repository.save(candidate);
 	}

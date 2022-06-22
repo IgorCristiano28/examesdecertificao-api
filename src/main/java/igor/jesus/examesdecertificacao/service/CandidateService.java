@@ -9,7 +9,7 @@ public interface CandidateService {
 	
     public Candidate autenticar(String email, String senha);
 	
-	public Candidate createCandidate(Candidate candidate);
+	public Candidate salvar(Candidate candidate);
 	
 	void delete(Candidate candidate);
 	

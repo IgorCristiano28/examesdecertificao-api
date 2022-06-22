@@ -30,7 +30,7 @@ public class ExamServiceImpl implements ExamService{
 	
 	@Override
 	@Transactional
-	public Exam createExam(Exam exam) {
+	public Exam salvar(Exam exam) {
 		validar(exam);
 		return repository.save(exam);
 	}

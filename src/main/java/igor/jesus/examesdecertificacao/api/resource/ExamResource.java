@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,21 +26,23 @@ import igor.jesus.examesdecertificacao.service.ExamService;
 import lombok.RequiredArgsConstructor;
 
 
-
 @RestController
 @RequestMapping("/api/exam")
 @RequiredArgsConstructor
 public class ExamResource {
 	
-	private ExamService service;
-	private CandidateService candidateService;
-	private AvailabilityService availabilityService;
+	
+	private final ExamService service;
+	
+	private final CandidateService candidateService;
+	
+	private final AvailabilityService availabilityService;
 	
 	
 	//public ExamResource(ExamService service, CandidateService candidateService,AvailabilityService availabilityService) {
-	//	this.service = service;
-	//	this.candidateService = candidateService;
-	//	this.availabilityService = availabilityService;
+		//this.service = service;
+		//this.candidateService = candidateService;
+		//this.availabilityService = availabilityService;
 		
 	//}
 	
@@ -73,13 +76,31 @@ public class ExamResource {
 	public ResponseEntity salvar(@RequestBody ExamDto dto) {
 		try {
 		Exam exam = converter(dto);
-		exam = service.createExam(exam);
+		exam = service.salvar(exam);
 		return new ResponseEntity(exam,HttpStatus.CREATED);
 		}catch (RegraNegocioException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 			}
 	}
+	
+	
 		
+	@PutMapping("{id}")
+	public ResponseEntity atualizar (@PathVariable ("id") Long id, @RequestBody ExamDto dto ) {
+		return service.obterPorId(id).map(entity -> {
+			try {
+			Exam exam = converter(dto);
+			exam.setId(entity.getId());
+			service.atualizar(exam);
+			return ResponseEntity.ok(exam);
+			}catch (RegraNegocioException e) {
+				return ResponseEntity.badRequest().body(e.getMessage());
+			}
+		}).orElseGet( () -> 
+		    new ResponseEntity("Exam não encontrado na base de Dados.", HttpStatus.BAD_REQUEST));
+		
+		
+	}
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity deletar(@PathVariable("id") Long id) {
@@ -97,17 +118,19 @@ public class ExamResource {
 		Exam exam = new Exam();
 		exam.setId(dto.getId());
 		exam.setDescricao(dto.getDescricao());
-		
+	
 		Candidate candidate = candidateService.
 		obterPorId(dto.getCandidate())
 		.orElseThrow(() -> new RegraNegocioException("Candidato não encontrado para o Id Informado"));
 		
 		Availability availability = availabilityService.
-		obterPorId(dto.getAvailability())
-		.orElseThrow(() -> new RegraNegocioException("Avaliação não encontrada para o Id Informado"));
+				 obterPorId(dto.getAvailability())
+				.orElseThrow(() -> new RegraNegocioException("Avaliação não encontrada para o Id Informado"));
+				
 		
-		exam.setAvailability(availability);
 		exam.setCandidate(candidate);
+		exam.setAvailability(availability);
+		
 		
 		return exam;
 		

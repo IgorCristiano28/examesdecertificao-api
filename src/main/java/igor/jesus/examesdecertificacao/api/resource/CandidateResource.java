@@ -16,20 +16,22 @@ import igor.jesus.examesdecertificacao.exception.RegraNegocioException;
 import igor.jesus.examesdecertificacao.model.entity.Candidate;
 import igor.jesus.examesdecertificacao.service.CandidateService;
 import igor.jesus.examesdecertificacao.service.ExamService;
+import lombok.RequiredArgsConstructor;
 
 
 
 @RestController
 @RequestMapping("/api/candidates")
+@RequiredArgsConstructor
 public class CandidateResource {
 	
-	private CandidateService service;
-	private ExamService examService;
+	private final CandidateService service;
+	private final ExamService examService;
 	
-	public CandidateResource(CandidateService service) {
-		this.service = service;
+	//public CandidateResource(CandidateService service) {
+	//	this.service = service;
 		
-	}
+	//}
 	
 	@PostMapping("/autenticar")
 	public ResponseEntity autenticar (@RequestBody CandidateDto dto) {
@@ -51,7 +53,7 @@ public class CandidateResource {
 				.senha(dto.getSenha()).build();
 		
 		try {
-			Candidate candidateSalvo = service.createCandidate(candidate);
+			Candidate candidateSalvo = service.salvar(candidate);
 			return new ResponseEntity(candidateSalvo,HttpStatus.CREATED);
 			
 		}catch (RegraNegocioException e) {
