@@ -50,8 +50,8 @@ public class ExamResource {
 	public ResponseEntity buscar(
 			
 			@RequestParam(value = "descricao", required = false) String descricao,
-			@RequestParam ("candidate") Long idCandidate,
-			@RequestParam ("availability") Long idAvailability
+			@RequestParam ( "candidate") Long idCandidate,
+			@RequestParam ( "availability") Long idAvailability
 			) {
 		Exam examFiltro = new Exam();
 		examFiltro.setDescricao(descricao);
@@ -60,9 +60,15 @@ public class ExamResource {
 		Optional<Availability> availability = availabilityService.obterPorId(idAvailability);
 		
 		if(!candidate.isPresent()) {
-			return ResponseEntity.badRequest().body("Não foi possível realizar a consulta. Usuário não encontrado para a pesquisa realizada");
+			return ResponseEntity.badRequest().body("Não foi possível realizar a consulta. Candidato não encontrado para a pesquisa realizada");
 		}else {
 			examFiltro.setCandidate(candidate.get());	
+		}
+		
+		if(!availability.isPresent()) {
+			return ResponseEntity.badRequest().body("Não foi possível realizar a consulta. Disponibilidade não encontrada para a pesquisa realizada");
+		}else {
+			examFiltro.setAvailability(availability.get());
 		}
 		
 		List<Exam> exam = service.buscar(examFiltro);

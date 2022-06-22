@@ -6,7 +6,7 @@ import igor.jesus.examesdecertificacao.model.entity.Availability;
 
 public interface AvailabilityService {
 	
-	public Availability createAvailability(Availability availability);
+	public Availability salvar(Availability availability);
 	
 	void delete(Availability availability);
 	

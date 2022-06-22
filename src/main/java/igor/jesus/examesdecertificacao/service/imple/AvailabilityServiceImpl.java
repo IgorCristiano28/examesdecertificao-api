@@ -30,7 +30,7 @@ public class AvailabilityServiceImpl implements AvailabilityService{
 	}
 
 	@Override
-	public Availability createAvailability(Availability availability) {
+	public Availability salvar(Availability availability) {
 		
 		return repository.save(availability);
 	}

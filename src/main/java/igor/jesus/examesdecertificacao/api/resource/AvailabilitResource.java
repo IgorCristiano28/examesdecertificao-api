@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import igor.jesus.examesdecertificacao.api.resource.api.dto.AvailabilityDto;
 import igor.jesus.examesdecertificacao.exception.RegraNegocioException;
 import igor.jesus.examesdecertificacao.model.entity.Availability;
+import igor.jesus.examesdecertificacao.model.entity.Room;
+import igor.jesus.examesdecertificacao.model.enums.StatusAvailability;
 import igor.jesus.examesdecertificacao.service.AvailabilityService;
 import igor.jesus.examesdecertificacao.service.CandidateService;
 import igor.jesus.examesdecertificacao.service.ExamService;
@@ -37,15 +39,15 @@ public class AvailabilitResource {
 	@PostMapping
 	public ResponseEntity salvar(@RequestBody AvailabilityDto dto) {
 		
-		Availability availability = Availability.builder()
-				.descricao(dto.getDescricao())
-				.status(dto.getStatus()).build();
+		/*
+		 * Availability availability = Availability.builder()
+		 * .descricao(dto.getDescricao()) .status(dto.getStatus()).build();
+		 */
 		
-		  
 		try {
-			Availability availabilitySalvo = service.createAvailability(availability);
-			return new ResponseEntity(availabilitySalvo,HttpStatus.CREATED);
-			
+			Availability availability = converter(dto);
+			availability = service.salvar(availability);
+			return new ResponseEntity(availability,HttpStatus.CREATED);	
 		}catch (RegraNegocioException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 			
@@ -62,6 +64,29 @@ public class AvailabilitResource {
 	    new ResponseEntity("Lancamento não encontrado na base de Dados.",HttpStatus.BAD_REQUEST));
 		
 	}
+	
+	private Availability converter (AvailabilityDto dto) {
+		Availability availability = new Availability();
+		availability.setId(dto.getId());
+		availability.setDescricao(dto.getDescricao());
+		
+		Room room = roomService.
+		obterPorId(dto.getRoom())
+		.orElseThrow(() -> new RegraNegocioException("Sala não encontrada para o Id informado"));
+		
+		availability.setRoom(room);
+		
+		if(dto.getStatus() != null) {
+			availability.setStatus(StatusAvailability.valueOf(dto.getStatus()));
+			
+		}
+	
+		return availability;
+				
+		
+		
+	}
+	
 	
 
 }

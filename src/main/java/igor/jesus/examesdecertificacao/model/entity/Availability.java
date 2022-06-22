@@ -42,7 +42,8 @@ public class Availability {
 	private String descricao;
 	
 	@Column(name = "status")
-	private String status;
+	@Enumerated(value = EnumType.STRING)
+	private StatusAvailability status;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_room")
