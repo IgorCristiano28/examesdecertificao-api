@@ -5,18 +5,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import igor.jesus.examesdecertificacao.api.resource.api.dto.AtualizarStatusDto;
 import igor.jesus.examesdecertificacao.api.resource.api.dto.AvailabilityDto;
 import igor.jesus.examesdecertificacao.exception.RegraNegocioException;
 import igor.jesus.examesdecertificacao.model.entity.Availability;
 import igor.jesus.examesdecertificacao.model.entity.Room;
 import igor.jesus.examesdecertificacao.model.enums.StatusAvailability;
 import igor.jesus.examesdecertificacao.service.AvailabilityService;
-import igor.jesus.examesdecertificacao.service.CandidateService;
-import igor.jesus.examesdecertificacao.service.ExamService;
 import igor.jesus.examesdecertificacao.service.RoomService;
 import lombok.RequiredArgsConstructor;
 
@@ -61,9 +61,56 @@ public class AvailabilitResource {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 			
 		}).orElseGet(() -> 
-	    new ResponseEntity("Lancamento não encontrado na base de Dados.",HttpStatus.BAD_REQUEST));
+	    new ResponseEntity("Disponibilidade não encontrado na base de Dados.",HttpStatus.BAD_REQUEST));
 		
 	}
+	
+	
+	@PutMapping("{id}")
+	public ResponseEntity atualizar(@PathVariable("id") Long id, @RequestBody AvailabilityDto dto) {
+		//a Entity é o retorno do meu optional
+		return service.obterPorId(id).map(Entity -> {
+			try {
+			Availability lancamento = converter (dto);
+			lancamento.setId(Entity.getId());
+			service.atualizar(lancamento);
+			return ResponseEntity.ok(lancamento);
+			}catch (RegraNegocioException e) {
+				return ResponseEntity.badRequest().body(e.getMessage());
+			}
+		}).orElseGet(() -> 
+		    new ResponseEntity("Disponibilidade não encontrado na base de Dados.",HttpStatus.BAD_REQUEST));
+		
+	}
+	
+	
+	
+	
+	@PutMapping("{id}/atualizar-status")
+	public ResponseEntity atualizarStatus(@PathVariable  ("id")Long id, @RequestBody AtualizarStatusDto dto) {
+		return service.obterPorId(id).map(Entity -> {
+			StatusAvailability statusSelecionado = StatusAvailability.valueOf(dto.getStatus());
+			if(statusSelecionado == null) {
+				return ResponseEntity.badRequest().body("Não foi possível atualizar o status da disponibilidade, envie um status valido");	
+			}
+			
+			try {
+				Entity.setStatus(statusSelecionado);
+				service.atualizar(Entity);
+				return ResponseEntity.ok(Entity);		
+				
+			}catch (RegraNegocioException e) {
+				return ResponseEntity.badRequest().body(e.getMessage());
+			}
+			
+		}).orElseGet(() -> 
+	    new ResponseEntity("Lancamento não encontrado na base de Dados.",HttpStatus.BAD_REQUEST));
+		
+		
+	}
+	
+	
+	
 	
 	private Availability converter (AvailabilityDto dto) {
 		Availability availability = new Availability();

@@ -48,9 +48,6 @@ public class Exam {
 	@JoinColumn(name = "id_availabity")
 	private Availability availability;
 	
-	@Column (name =  "data_cadastro")
-	@Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
-	private LocalDate dataCadastro;
 
 	
 

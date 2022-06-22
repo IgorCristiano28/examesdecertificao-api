@@ -1,5 +1,7 @@
 package igor.jesus.examesdecertificacao.api.resource.api.dto;
 
+import java.time.LocalDate;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

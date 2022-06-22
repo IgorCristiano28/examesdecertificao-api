@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import igor.jesus.examesdecertificacao.model.entity.Availability;
+import igor.jesus.examesdecertificacao.model.enums.StatusAvailability;
 import igor.jesus.examesdecertificacao.model.repository.AvailabilityRepository;
 import igor.jesus.examesdecertificacao.service.AvailabilityService;
 
@@ -42,6 +43,32 @@ public class AvailabilityServiceImpl implements AvailabilityService{
 		
 	}
 
+	@Override
+	public void validar(Availability availability) {
+		
+		
+	}
+
+	
+	@Override
+	public Availability atualizar(Availability availability) {
+		Objects.requireNonNull(availability.getId());
+		validar(availability);
+		return repository.save(availability);
+	}
+	
+
+	@Override
+	public void atualizarStatus(Availability availability, StatusAvailability status) {
+		availability.setStatus(status);
+		atualizar(availability);
+		
+	}
+
+
+
+
+	
 	
 
 	

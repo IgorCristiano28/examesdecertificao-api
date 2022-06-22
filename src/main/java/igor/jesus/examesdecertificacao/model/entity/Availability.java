@@ -49,9 +49,6 @@ public class Availability {
 	@JoinColumn(name = "id_room")
 	private Room room;
 	
-	@Column (name= "data_cadastro")
-	@Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
-	private LocalDate dataCadastro;
 	
 
 }

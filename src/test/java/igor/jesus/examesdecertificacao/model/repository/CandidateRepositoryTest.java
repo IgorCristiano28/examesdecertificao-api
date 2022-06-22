@@ -20,7 +20,7 @@ import igor.jesus.examesdecertificacao.model.entity.Candidate;
 @ActiveProfiles("test")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-public class CandidatoRepositoryTest {
+public class CandidateRepositoryTest {
 	
 	@Autowired
 	CandidateRepository repository;

@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.StringMatcher;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import igor.jesus.examesdecertificacao.exception.RegraNegocioException;
 import igor.jesus.examesdecertificacao.model.entity.Exam;
+import igor.jesus.examesdecertificacao.model.enums.StatusAvailability;
 import igor.jesus.examesdecertificacao.model.repository.ExamRepository;
 import igor.jesus.examesdecertificacao.service.ExamService;
 
@@ -77,6 +79,11 @@ public class ExamServiceImpl implements ExamService{
 			throw new RegraNegocioException("Informe uma descrição válida");
 				
 		}
+		
+		if(exam.getAvailability().getStatus() != StatusAvailability.DISPONIVEL) {
+			throw new RegraNegocioException("Exame não disponivel");
+		}
+		
 	}
 	
 

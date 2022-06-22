@@ -20,6 +20,7 @@ import igor.jesus.examesdecertificacao.exception.RegraNegocioException;
 import igor.jesus.examesdecertificacao.model.entity.Availability;
 import igor.jesus.examesdecertificacao.model.entity.Candidate;
 import igor.jesus.examesdecertificacao.model.entity.Exam;
+import igor.jesus.examesdecertificacao.model.enums.StatusAvailability;
 import igor.jesus.examesdecertificacao.service.AvailabilityService;
 import igor.jesus.examesdecertificacao.service.CandidateService;
 import igor.jesus.examesdecertificacao.service.ExamService;
@@ -135,9 +136,9 @@ public class ExamResource {
 				
 		
 		exam.setCandidate(candidate);
+		
 		exam.setAvailability(availability);
-		
-		
+			
 		return exam;
 		
 	}

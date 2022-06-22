@@ -43,8 +43,5 @@ public class Candidate {
 	@Column (name = "email")
 	private String email;
 	
-	@Column (name =  "data_cadastro")
-	@Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
-	private LocalDate dataCadastro;
 
 }
