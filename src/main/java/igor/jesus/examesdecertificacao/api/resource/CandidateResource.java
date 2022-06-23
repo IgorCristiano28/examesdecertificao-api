@@ -28,11 +28,6 @@ public class CandidateResource {
 	private final CandidateService service;
 	private final ExamService examService;
 	
-	//public CandidateResource(CandidateService service) {
-	//	this.service = service;
-		
-	//}
-	
 	@PostMapping("/autenticar")
 	public ResponseEntity autenticar (@RequestBody CandidateDto dto) {
 		

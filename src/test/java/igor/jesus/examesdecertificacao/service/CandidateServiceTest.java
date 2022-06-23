@@ -49,8 +49,6 @@ public class CandidateServiceTest {
 		Candidate candidate = Candidate.builder().nome("candidate").email("email@email.com").senha("teste").build();
 		repository.save(candidate);
 		  
-		
-		
 		//acao
 		service.validarEmail("email@email.com");
 		});

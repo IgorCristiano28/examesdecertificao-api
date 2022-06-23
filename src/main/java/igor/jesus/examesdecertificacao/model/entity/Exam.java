@@ -30,11 +30,9 @@ public class Exam {
 	@Column (name= "descricao")
 	private String descricao;
 	
-	
 	@ManyToOne
 	@JoinColumn(name = "id_candidate")
 	private Candidate candidate;
-	
 	
 	@ManyToOne
 	@JoinColumn(name = "id_availabity")

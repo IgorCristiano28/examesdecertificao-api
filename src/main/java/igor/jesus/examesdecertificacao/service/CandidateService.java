@@ -17,8 +17,7 @@ public interface CandidateService {
 	
 	List<Candidate> buscar(Candidate candidateFiltro);
 	
-	 //metodo pra buscar usuario por id, passando o id para retorna o usuario
-	 Optional<Candidate> obterPorId(Long id);
+	Optional<Candidate> obterPorId(Long id);
 
 
 }

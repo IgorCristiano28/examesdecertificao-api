@@ -31,11 +31,6 @@ public class RoomResource {
 	
 	private final RoomService service;
 	
-	//public RoomResource(RoomService service) {
-	//	this.service = service;
-		
-	//}
-	
 	@PostMapping
 	public ResponseEntity salvar(@RequestBody RoomDto dto) {
 		

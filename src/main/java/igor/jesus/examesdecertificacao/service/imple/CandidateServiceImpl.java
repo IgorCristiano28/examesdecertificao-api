@@ -70,7 +70,6 @@ public class CandidateServiceImpl implements CandidateService{
 
 	@Override
 	public List<Candidate> buscar(Candidate candidateFiltro) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

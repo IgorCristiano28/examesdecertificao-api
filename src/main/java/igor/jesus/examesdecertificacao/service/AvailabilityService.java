@@ -16,7 +16,7 @@ public interface AvailabilityService {
 	
     void validar (Availability availability);
     
-    //ja tem q estar com id
+    //Tem q estar com id
   	Availability atualizar (Availability availability);
     
     void atualizarStatus(Availability lancamento, StatusAvailability status);

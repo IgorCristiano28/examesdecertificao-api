@@ -31,11 +31,6 @@ public class AvailabilitResource {
 	
 	private final RoomService roomService;
 	
-	//public AvailabilitResource(AvailabilityService service) {
-	//	this.service = service;
-		
-	//}
-	
 	@PostMapping
 	public ResponseEntity salvar(@RequestBody AvailabilityDto dto) {
 		

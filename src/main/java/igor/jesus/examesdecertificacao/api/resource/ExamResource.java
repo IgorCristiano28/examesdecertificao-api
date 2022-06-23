@@ -39,14 +39,6 @@ public class ExamResource {
 	
 	private final AvailabilityService availabilityService;
 	
-	
-	//public ExamResource(ExamService service, CandidateService candidateService,AvailabilityService availabilityService) {
-		//this.service = service;
-		//this.candidateService = candidateService;
-		//this.availabilityService = availabilityService;
-		
-	//}
-	
 	@GetMapping
 	public ResponseEntity buscar(
 			

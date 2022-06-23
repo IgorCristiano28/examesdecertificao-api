@@ -31,7 +31,7 @@ public class CandidateRepositoryTest {
 	@Test @Order(1)
 	public void deveVerificarAExistenciaDeUmEmail() {
 		Candidate candidate = criarCandidate();
-		//repository.save(candidate);
+		
 		entityManager.persist(candidate);
 		
 		
@@ -87,8 +87,6 @@ public class CandidateRepositoryTest {
 	
 	@Test @Order(5)
 	public void deveRetornaVazioAoBuscarCandidatoPorEmailQuandoNaoExisteNaBase() {
-		//cenario
-		
 		
 		//verificao
 		Optional<Candidate> result = repository.findByEmail("candidate@email.com");

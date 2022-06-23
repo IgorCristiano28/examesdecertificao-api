@@ -15,10 +15,10 @@ public interface ExamService {
 	void delete(Exam exam);
 	void validar (Exam exam);
 	
-	//metodo pra buscar usuario por id, passando o id para retorna o usuario
+	
     Optional<Exam> obterPorId(Long id);
     
-  //buscar, vai retorna uma lista de exames
+    //Retorna uma lista de exames
   	List<Exam> buscar(Exam examFiltro);
 	
 
