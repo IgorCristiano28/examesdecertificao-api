@@ -1,9 +1,6 @@
 package igor.jesus.examesdecertificacao.model.entity;
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,13 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import igor.jesus.examesdecertificacao.model.enums.StatusAvailability;
 import lombok.AllArgsConstructor;

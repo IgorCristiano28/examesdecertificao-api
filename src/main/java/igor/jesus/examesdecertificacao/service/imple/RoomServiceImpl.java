@@ -6,11 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import igor.jesus.examesdecertificacao.model.entity.Availability;
 import igor.jesus.examesdecertificacao.model.entity.Room;
-import igor.jesus.examesdecertificacao.model.repository.AvailabilityRepository;
 import igor.jesus.examesdecertificacao.model.repository.RoomRepository;
-import igor.jesus.examesdecertificacao.service.AvailabilityService;
 import igor.jesus.examesdecertificacao.service.RoomService;
 
 @Service
